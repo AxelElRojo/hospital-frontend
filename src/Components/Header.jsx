@@ -12,7 +12,7 @@ const Header = ({onLogout, setEntity, setAction}) => {
 				<Navbar.Brand onClick={() => {setEntity(''); setAction('')}} className='hover-click text-center mx-auto fs-3 text-pearl'>
 					MED-SYS
 				</Navbar.Brand>
-				<Container className='py-4my-5 d-inline-flex'>
+				<Container>
 					<HeaderItems setEntity={setEntity} setAction={setAction}/>
 				</Container>
 				<FontAwesomeIcon onClick={onLogout} icon={faRightFromBracket} className='hover-click text-pearl ' size='2xl'/>

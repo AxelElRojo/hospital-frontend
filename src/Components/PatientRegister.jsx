@@ -39,7 +39,7 @@ const PatientRegister = () => {
 				<Form.Label>Dirección</Form.Label>
 				<Form.Control type="text" className='mb-3' name='direccion'/>
 			</Form.Group>
-			<Form.Group className="mb-3 text-center" controlId="patient.submit">
+			<Form.Group className="my-4 text-center" controlId="patient.submit">
 				<Button type='submit'>Registrar Paciente</Button>
 			</Form.Group>
 		</Form>
