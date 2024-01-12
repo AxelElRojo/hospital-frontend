@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-const Login = ({ onLogin }) => {
+import Row from 'react-bootstrap/Row';
+const Login = ({onLogin, setIsPatient}) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const handleLogin = () => {
@@ -13,7 +14,7 @@ const Login = ({ onLogin }) => {
     }
   };
   return (
-    <Form className='shadow w-25 p-2 bg-secondary rounded text-white align-self-center mx-auto' onSubmit={handleLogin}>
+    <Form className='shadow w-25 pt-3 p-2 rounded text-white align-self-center mx-auto login-box'>
       <Form.Group className="text-start" controlId="loginForm.user">
         <Form.Label>Código de Usuario</Form.Label>
         <Form.Control type="text" className='mb-3' onChange={setUsername}/>
@@ -22,9 +23,14 @@ const Login = ({ onLogin }) => {
         <Form.Label>Contraseña</Form.Label>
         <Form.Control type="password" className='mb-3' onChange={setPassword}/>
       </Form.Group>
-      <Form.Group className="mb-3 text-center" controlId="loginForm.submit">
-        <Button type='submit'>Iniciar sesión</Button>
-      </Form.Group>
+      <Row className='mt-5'>
+        <Form.Group className="mb-3 text-center w-50" controlId="loginForm.submit">
+          <Button type='submit' onClick={handleLogin}>Iniciar sesión</Button>
+        </Form.Group>
+        <Form.Group className="mb-3 text-center w-50" controlId="loginForm.submit" onClick={() => setIsPatient(true)}>
+          <Button className='btn-secondary' type='submit'>¿Eres paciente?</Button>
+        </Form.Group>
+      </Row>
     </Form>
   );
 };

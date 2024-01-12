@@ -1,35 +1,38 @@
 import React from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Row from 'react-bootstrap/Row';
 import requests from '../Util/Requests';
 const handleSubmit = (event) => {
 	event.preventDefault();
 	const patient = {};
-	patient.name = event.target.elements.name.value;
-	patient.lastname = event.target.elements.lastname.value;
-	patient.tel = event.target.elements.tel.value;
+	patient.nombre = event.target.elements.nombre.value;
+	patient.apellido = event.target.elements.apellido.value;
+	patient.telefono = event.target.elements.telefono.value;
 	patient.email = event.target.elements.email.value;
-	patient.address = event.target.elements.address.value;
+	patient.direccion = event.target.elements.direccion.value;
 	requests.post('pacientes', patient, (response) => {
 		alert("Alta exitosa :)");
 	}, (error) => {
 		console.error(error);
 	});
 }
-const PatientRegister = () => {
+const PatientRegister = ({afterSubmit, width, setPhone}) => {
 	return (
-		<Form className='mx-auto w-50 p-2 rounded text-white' onSubmit={handleSubmit}>
-			<Form.Group className="text-start" controlId="patient.nombre">
-				<Form.Label>Nombres</Form.Label>
-				<Form.Control type="text" className='mb-3' name='nombre'/>
-			</Form.Group>
-			<Form.Group className="text-start" controlId="patient.apellido">
-				<Form.Label>Apellidos</Form.Label>
-				<Form.Control type="text" className='mb-3' name='apellido'/>
-			</Form.Group>
+		<Form className={`container mx-auto ${width} p-2 rounded text-white`} onSubmit={handleSubmit}>
+			<Row>
+				<Form.Group className="text-start w-50" controlId="patient.nombre">
+					<Form.Label>Nombres</Form.Label>
+					<Form.Control type="text" className='mb-3' name='nombre'/>
+				</Form.Group>
+				<Form.Group className="text-start w-50" controlId="patient.apellido">
+					<Form.Label>Apellidos</Form.Label>
+					<Form.Control type="text" className='mb-3' name='apellido'/>
+				</Form.Group>
+			</Row>
 			<Form.Group className="text-start" controlId="patient.telefono">
 				<Form.Label>Número de teléfono</Form.Label>
-				<Form.Control type="tel" className='mb-3' name='telefono'/>
+				<Form.Control type="tel" className='mb-3' onChange={() => {if(setPhone) setPhone(this.value)}} name='telefono'/>
 			</Form.Group>
 			<Form.Group className="text-start" controlId="patient.email">
 				<Form.Label>Email</Form.Label>
@@ -40,7 +43,7 @@ const PatientRegister = () => {
 				<Form.Control type="text" className='mb-3' name='direccion'/>
 			</Form.Group>
 			<Form.Group className="my-4 text-center" controlId="patient.submit">
-				<Button type='submit'>Registrar Paciente</Button>
+				<Button type='submit' onClick={() => {if(afterSubmit) afterSubmit(true)}}>Registrar Paciente</Button>
 			</Form.Group>
 		</Form>
 	);

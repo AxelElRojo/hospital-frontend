@@ -12,7 +12,7 @@ const PatientTable = () => {
 				console.error(error);
 			});
 	}, []);
-	return (<DataTable value={patients} className='text-white mt-5 align-middle mx-auto text-uppercase shadow p-5 rounded bg-secondary' tableStyle={{minWidth: '50rem'}}>
+	return (<DataTable value={patients} header={<h5 className='text-start'>Pacientes</h5>} className='text-black tabla-lista mt-5 align-middle mx-auto text-uppercase shadow p-4'>
 		<Column field="nombre" header="Nombre"></Column>
 		<Column field="apellido" header="Apellido" sortable></Column>
 		<Column field="telefono" header="Teléfono"></Column>

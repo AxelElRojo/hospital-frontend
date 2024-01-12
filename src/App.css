@@ -7,3 +7,18 @@
 .hover-click:hover{
   cursor: pointer;
 }
+.tabla-lista{
+  background-color: #e6e6e6;
+  border-radius: 2rem;
+}
+.p-datatable-thead{
+  background-color: #abaaaa;
+  padding: 5rem;
+  border-radius: 5rem;
+}
+.login-bg{
+  background-image: url("always-grey.png");
+}
+.login-box{
+  background-color: rgba(91, 91, 91, 0.3);
+}
