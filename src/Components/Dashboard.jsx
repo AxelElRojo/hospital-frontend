@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import requests from '../Util/Requests';
 import Stats from './Stats';
 import Row from 'react-bootstrap/Row';
 import Header from './Header';
@@ -9,6 +8,7 @@ import DoctorRegister from './DoctorRegister';
 import ConsultationRegister from './ConsultationRegister';
 import EntityTable from './EntityTable';
 import TopBar from './TopBar';
+import fetcher from '../Util/FetchData';
 function renderEntity(entity, action, items, specialties, selPatients){
 	switch(entity){
 		case 'patient':
@@ -50,36 +50,10 @@ const Dashboard = ({ username, onLogout }) => {
 	const [specialties, setSpecialties] = useState([]);
 	const [selPatients, setSelPatients] = useState([]);
 	useEffect(() => {
-		requests.get('pacientes', {}, (response) => {
-				setPatients(response.data);
-				let newPatients = [];
-				response.data.forEach((value) => {
-					newPatients.push({'value': value.id, 'label': value.nombre + ' ' + value.apellido});
-				});
-				setSelPatients(newPatients);
-			}, (error) => {
-				console.error(error);
-		});
-		requests.get('consultas', {}, (response) => {
-				setConsultations(response.data);
-			}, (error) => {
-				console.error(error);
-		});
-		requests.get('doctores', {}, (response) => {
-				setDoctors(response.data);
-			}, (error) => {
-				console.error(error);
-		});
-		requests.get('especialidades', {}, (response) => {
-			let newSpecialties = [];
-			response.data.forEach((value) => {
-				newSpecialties.push({'value': value.id, 'label': value.nombre});
-			});
-			console.log(newSpecialties);
-			setSpecialties(newSpecialties);
-		}, (error) => {
-			console.error(error);
-		});
+		fetcher.pacientes(setPatients, setSelPatients);
+		fetcher.consultas(setConsultations);
+		fetcher.doctores(setDoctors);
+		fetcher.specialties(setSpecialties);
 	}, []);
 	return (<>
 		<Header username={username} onLogout={onLogout} setEntity={setEntity} setAction={setAction}/>
